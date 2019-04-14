@@ -1,0 +1,23 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "module": "commonjs",
+    "lib": ["es6"],
+    "noImplicitAny": true,
+    "removeComments": true,
+    "preserveConstEnums": true,
+    "sourceMap": true,
+    "strictNullChecks": true,
+    "declaration": true
+  },
+  "rules": {
+    "indent": [
+      true,
+      "spaces",
+      2
+    ]
+  },
+  "files": [
+    "index.ts"
+  ]
+}
