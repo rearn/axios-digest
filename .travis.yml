@@ -10,4 +10,4 @@ node_js:
 service: docker
 
 before_install:
-  - docker run -p 80:80 kennethreitz/httpbin
+  - docker run -d -p 80:80 kennethreitz/httpbin
