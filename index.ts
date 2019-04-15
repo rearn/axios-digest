@@ -3,7 +3,7 @@ import { md5 } from 'js-md5';
 import { sha256 } from 'js-sha256';
 import { sha512_256 } from 'js-sha512';
 
-export class DigestAxios {
+export class AxiosDigest {
   private readonly axios: AxiosInstance|AxiosStatic;
   private username: string;
   private passwd: string;
