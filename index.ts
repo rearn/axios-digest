@@ -96,7 +96,8 @@ export class AxiosDigest {
       }
       return v;
     }).filter((v) => ['MD5', 'SHA-256', 'SHA-512-256', 'SHA-512'].findIndex((i) => i === v.algorithm) >= 0)
-    .filter((v) => calams.filter((value) => ! (value in v)).length === 0);
+    .filter((v) => calams.filter((value) => ! (value in v)).length === 0)
+    .filter((v) => v.qop.split(/\s*,\s*/).filter((v) => v === 'auth').length !== 0);
 
     if (paramsCalamsOk.length === 0) {
       throw new Error('Auth params error.');
@@ -114,10 +115,10 @@ export class AxiosDigest {
     const username = this.username;
     const passwd = this.passwd;
     const { realm, nonce, opaque, algorithm } = params;
-    const uri: string = url.split(/^https?:\/\/[^\/]+/)[1];
+    const uri: string = url.split(/^https?:\/\/[^\/]+/).filter((v) => v !== '')[0];
     const cnonce: string = Math.random().toString(32).substring(2); // gaba
     const nc: string = '0001'; // gaba
-    const qop: string = params.qop.split(/\s*,\s*/).filter((v) => v !== '')[0]; // gaba
+    const qop: string = 'auth';
 
     const hashHex = ((): (str: string) => string => {
       if (algorithm === 'MD5') return md5;
