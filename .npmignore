@@ -3,4 +3,3 @@ index.test.ts
 index.ts
 .travis.yml
 tslint.json
-types/*
