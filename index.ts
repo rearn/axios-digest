@@ -1,7 +1,7 @@
 import axios, { AxiosInstance, AxiosRequestConfig, AxiosStatic } from 'axios';
-import { md5 } from 'js-md5';
+import * as md5 from 'js-md5';
 import { sha256 } from 'js-sha256';
-import { sha512_256 } from 'js-sha512';
+import { sha512, sha512_256 } from 'js-sha512';
 
 export class AxiosDigest {
   private readonly axios: AxiosInstance|AxiosStatic;
@@ -75,7 +75,7 @@ export class AxiosDigest {
 
   private getAuthHeader(authHeader: string, method: string, url: string, config?: AxiosRequestConfig) {
     const paramsString: string[] = authHeader.split(/\s*,?\s*Digest\s*/).filter((v) => v !== '');
-    const paramsArray: string[][] = paramsString.map((v) => v.split(/\s*,(?=(?:[^"]*"[^"]*")*$)\s*/));
+    const paramsArray: string[][] = paramsString.map((v) => v.split(/\s*,(?=(?:[^"]*"[^"]*")*)\s*/));
     const paramsKvArray: [string, string][][] = paramsArray.map<[string, string][]>((v) => {
       return v.map<[string, string]>((value) => {
         const ret = value.split(/\s*=(?:(?=[^"]*"[^"]*")|(?!"))\s*/, 2).map((v2) => {
@@ -95,7 +95,7 @@ export class AxiosDigest {
         v['algorithm'] = 'MD5';
       }
       return v;
-    }).filter((v) => v.algorithm in ['MD5', 'SHA-256', 'SHA-512-256'])
+    }).filter((v) => ['MD5', 'SHA-256', 'SHA-512-256', 'SHA-512'].findIndex((i) => i === v.algorithm) >= 0)
     .filter((v) => calams.filter((value) => ! (value in v)).length === 0);
 
     if (paramsCalamsOk.length === 0) {
@@ -105,7 +105,8 @@ export class AxiosDigest {
       const [aEval, bEval] = [a.algorithm, b.algorithm].map((v) => {
         if (v === 'MD5') return 0;
         if (v === 'SHA-256') return 1;
-        return 2;
+        if (v === 'SHA-512-256') return 2;
+        return 3;
       });
       return bEval - aEval;
     });
@@ -113,15 +114,16 @@ export class AxiosDigest {
     const username = this.username;
     const passwd = this.passwd;
     const { realm, nonce, opaque, algorithm } = params;
-    const uri: string = url;
-    const cnonce: string = Array(8).map(() => Math.random().toString(36).slice(-8)).join('');
+    const uri: string = url.split(/^https?:\/\/[^\/]+/)[1];
+    const cnonce: string = Math.random().toString(32).substring(2); // gaba
     const nc: string = '0001'; // gaba
     const qop: string = params.qop.split(/\s*,\s*/).filter((v) => v !== '')[0]; // gaba
 
     const hashHex = ((): (str: string) => string => {
       if (algorithm === 'MD5') return md5;
       if (algorithm === 'SHA-256') return sha256;
-      return sha512_256;
+      if (algorithm === 'SHA-512-256') return sha512_256;
+      return sha512;
     })();
 
     const hashHexArray = (data: string[]) => {
@@ -147,6 +149,7 @@ export class AxiosDigest {
     };
 
     const auth = `Digest ${Object.keys(dh).map((v) => `${v}="${dh[v]}"`).join(', ')}`;
+
     if (config === undefined) {
       return { headers: { Authorization: auth } };
     }

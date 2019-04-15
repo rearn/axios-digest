@@ -7,3 +7,7 @@ node_js:
   - "7"
   - "6"
 
+service: docker
+
+before_install:
+  - docker run -p 80:80 kennethreitz/httpbin
