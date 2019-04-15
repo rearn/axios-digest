@@ -1,13 +1,15 @@
-import axios, { AxiosInstance, AxiosRequestConfig } from 'axios';
+import axios, { AxiosInstance, AxiosRequestConfig, AxiosStatic } from 'axios';
 import { md5 } from 'js-md5';
 import { sha256 } from 'js-sha256';
 import { sha512_256 } from 'js-sha512';
 
 export class DigestAxios {
+  private readonly axios: AxiosInstance|AxiosStatic;
   private username: string;
   private passwd: string;
 
-  constructor(username: string, passwd: string) {
+  constructor(username: string, passwd: string, customAxios?: AxiosInstance|AxiosStatic) {
+    this.axios = customAxios !== undefined ? customAxios : axios;
     this.username = username;
     this.passwd = passwd;
   }
@@ -22,30 +24,44 @@ export class DigestAxios {
   }
 
   public get(path: string, config?: AxiosRequestConfig) {
-    return axios.get(path, config).catch(this.getWwwAuth).then((wwwAuth) => {
+    return this.axios.get(path, config).catch(this.getWwwAuth).then((wwwAuth) => {
       const c = this.getAuthHeader(wwwAuth, 'GET', path, config);
-      return axios.get(path, c);
+      return this.axios.get(path, c);
     });
   }
 
   public post(path: string, data?: any, config?: AxiosRequestConfig) {
-    return axios.post(path, data, config).catch(this.getWwwAuth).then((wwwAuth) => {
+    return this.axios.post(path, data, config).catch(this.getWwwAuth).then((wwwAuth) => {
       const c = this.getAuthHeader(wwwAuth, 'POST', path, config);
-      return axios.post(path, data, c);
+      return this.axios.post(path, data, c);
     });
   }
 
   public put(path: string, data?: any, config?: AxiosRequestConfig) {
-    return axios.put(path, data, config).catch(this.getWwwAuth).then((wwwAuth) => {
+    return this.axios.put(path, data, config).catch(this.getWwwAuth).then((wwwAuth) => {
       const c = this.getAuthHeader(wwwAuth, 'PUT', path, config);
-      return axios.put(path, data, c);
+      return this.axios.put(path, data, c);
     });
   }
 
   public delete(path: string, config?: AxiosRequestConfig) {
-    return axios.delete(path, config).catch(this.getWwwAuth).then((wwwAuth) => {
+    return this.axios.delete(path, config).catch(this.getWwwAuth).then((wwwAuth) => {
       const c = this.getAuthHeader(wwwAuth, 'DELETE', path, config);
-      return axios.delete(path, c);
+      return this.axios.delete(path, c);
+    });
+  }
+
+  public head(path: string, config?: AxiosRequestConfig) {
+    return this.axios.head(path, config).catch(this.getWwwAuth).then((wwwAuth) => {
+      const c = this.getAuthHeader(wwwAuth, 'HEAD', path, config);
+      return this.axios.head(path, c);
+    });
+  }
+
+  public patch(path: string, data?: any, config?: AxiosRequestConfig) {
+    return this.axios.patch(path, data, config).catch(this.getWwwAuth).then((wwwAuth) => {
+      const c = this.getAuthHeader(wwwAuth, 'PATCH', path, config);
+      return this.axios.patch(path, data, c);
     });
   }
 
