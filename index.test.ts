@@ -6,7 +6,7 @@ import AxiosDigest from '.';
 const username = 'taro';
 const passwd = 'pass';
 
-const base = 'http://localhost';
+const base = 'http://httpbin.org';
 
 const axios = new AxiosDigest(username, passwd);
 describe('digest', () => {
@@ -34,5 +34,17 @@ describe('digest-int', () => {
   });
   test('SHA-512-int (not support)', () => {
     expect(axios.get(`${base}${url}SHA-512`)).rejects.toMatch('error');
+  });
+});
+
+describe('no auth', () => {
+  const url = '/status/200';
+  test('GET', async () => {
+    const a = await axios.get(`${base}${url}`);
+    expect(a.status).toBe(200);
+  });
+  test('POST', async () => {
+    const a = await axios.post(`${base}${url}`);
+    expect(a.status).toBe(200);
   });
 });
