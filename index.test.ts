@@ -25,14 +25,14 @@ describe('digest', () => {
   });
 });
 describe('digest-int', () => {
-  const url2 = `/digest-auth/auth-int/${username}/${passwd}/`;
+  const url = `/digest-auth/auth-int/${username}/${passwd}/`;
   test('MD5-int (not support)', () => {
-    expect(axios.get(`${base}${url2}MD5`)).rejects.toMatch('error');
+    expect(axios.get(`${base}${url}MD5`)).rejects.toMatch('error');
   });
   test('SHA-256-int (not support)', () => {
-    expect(axios.get(`${base}${url2}SHA-256`)).rejects.toMatch('error');
+    expect(axios.get(`${base}${url}SHA-256`)).rejects.toMatch('error');
   });
   test('SHA-512-int (not support)', () => {
-    expect(axios.get(`${base}${url2}SHA-512`)).rejects.toMatch('error');
+    expect(axios.get(`${base}${url}SHA-512`)).rejects.toMatch('error');
   });
 });
