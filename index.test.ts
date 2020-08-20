@@ -47,4 +47,12 @@ describe('no auth', () => {
     const a = await axios.post(`${base}${url}`);
     expect(a.status).toBe(200);
   });
+  test('PUT', async () => {
+    const a = await axios.put(`${base}${url}`);
+    expect(a.status).toBe(200);
+  });
+  test('DELETE', async () => {
+    const a = await axios.delete(`${base}${url}`);
+    expect(a.status).toBe(200);
+  });
 });
