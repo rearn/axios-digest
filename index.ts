@@ -26,32 +26,40 @@ export default class AxiosDigest {
     return { username: this.username, passwd: '***' };
   }
 
-  public get(path: string, config?: AxiosRequestConfig) {
-    return this.axios.get(path, config).catch(this.getWwwAuth).then((wwwAuth) => {
-      const c = this.getAuthHeader(wwwAuth, 'GET', path, config);
+  public async get(path: string, config?: AxiosRequestConfig) {
+    try {
+      return await this.axios.get(path, config);
+    } catch (v) {
+      const c = this.getAuthHeader(this.getWwwAuth(v), 'GET', path, config);
       return this.axios.get(path, c);
-    });
+    }
   }
 
-  public post(path: string, data?: any, config?: AxiosRequestConfig) {
-    return this.axios.post(path, data, config).catch(this.getWwwAuth).then((wwwAuth) => {
-      const c = this.getAuthHeader(wwwAuth, 'POST', path, config);
+  public async post(path: string, data?: any, config?: AxiosRequestConfig) {
+    try {
+      return await this.axios.post(path, data, config);
+    } catch (v) {
+      const c = this.getAuthHeader(this.getWwwAuth(v), 'POST', path, config);
       return this.axios.post(path, data, c);
-    });
+    }
   }
 
-  public put(path: string, data?: any, config?: AxiosRequestConfig) {
-    return this.axios.put(path, data, config).catch(this.getWwwAuth).then((wwwAuth) => {
-      const c = this.getAuthHeader(wwwAuth, 'PUT', path, config);
+  public async put(path: string, data?: any, config?: AxiosRequestConfig) {
+    try {
+      return await this.axios.put(path, data, config);
+    } catch (v) {
+      const c = this.getAuthHeader(this.getWwwAuth(v), 'PUT', path, config);
       return this.axios.put(path, data, c);
-    });
+    }
   }
 
-  public delete(path: string, config?: AxiosRequestConfig) {
-    return this.axios.delete(path, config).catch(this.getWwwAuth).then((wwwAuth) => {
-      const c = this.getAuthHeader(wwwAuth, 'DELETE', path, config);
+  public async delete(path: string, config?: AxiosRequestConfig) {
+    try {
+      return await this.axios.delete(path, config);
+    } catch (v) {
+      const c = this.getAuthHeader(this.getWwwAuth(v), 'DELETE', path, config);
       return this.axios.delete(path, c);
-    });
+    }
   }
 
   public head(path: string, config?: AxiosRequestConfig) {
