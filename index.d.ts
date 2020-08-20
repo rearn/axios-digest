@@ -1,10 +1,14 @@
 import { AxiosInstance, AxiosRequestConfig, AxiosStatic } from 'axios';
-export declare class AxiosDigest {
+export default class AxiosDigest {
     private readonly axios;
     private username;
     private passwd;
     constructor(username: string, passwd: string, customAxios?: AxiosInstance | AxiosStatic);
-    info: {
+    set info(d: {
+        username: string;
+        passwd: string;
+    });
+    get info(): {
         username: string;
         passwd: string;
     };
