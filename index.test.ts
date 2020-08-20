@@ -1,8 +1,8 @@
-import { AxiosDigest } from '.';
+/* eslint-disable no-undef */
+/* eslint-disable import/extensions */
+/* eslint-disable import/no-unresolved */
+import AxiosDigest from '.';
 
-const rand = (): number => {
-  return Math.floor(Math.random() * 0x100);
-};
 const username = 'taro';
 const passwd = 'pass';
 
