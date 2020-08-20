@@ -6,7 +6,7 @@ import AxiosDigest from '.';
 const username = 'taro';
 const passwd = 'pass';
 
-const base = 'http://httpbin.org';
+const base = 'http://localhost';
 
 const axios = new AxiosDigest(username, passwd);
 describe('digest', () => {
