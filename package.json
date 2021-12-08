@@ -55,6 +55,7 @@
     },
     "testMatch": [
       "**/*.test.ts"
-    ]
+    ],
+    "testEnvironment": "node"
   }
 }
