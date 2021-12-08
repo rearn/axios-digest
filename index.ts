@@ -113,7 +113,7 @@ export default class AxiosDigest {
       }
       return v;
     }).filter((v) => ['MD5', 'SHA-256', 'SHA-512-256', 'SHA-512'].findIndex((i) => i === v.algorithm) >= 0)
-      .filter((v) => calams.filter((value) => !(value in v)).length !== 0)
+      .filter((v) => calams.filter((value) => !(value in v)).length === 0)
       .filter((v) => v.qop.split(/\s*,\s*/).filter((v2) => v2 === 'auth').length !== 0);
 
     if (paramsCalamsOk.length === 0) {
