@@ -12,12 +12,12 @@ export default class AxiosDigest {
         username: string;
         passwd: string;
     };
-    get(path: string, config?: AxiosRequestConfig): Promise<import("axios").AxiosResponse<any>>;
-    post(path: string, data?: any, config?: AxiosRequestConfig): Promise<import("axios").AxiosResponse<any>>;
-    put(path: string, data?: any, config?: AxiosRequestConfig): Promise<import("axios").AxiosResponse<any>>;
-    delete(path: string, config?: AxiosRequestConfig): Promise<import("axios").AxiosResponse<any>>;
-    head(path: string, config?: AxiosRequestConfig): Promise<import("axios").AxiosResponse<any>>;
-    patch(path: string, data?: any, config?: AxiosRequestConfig): Promise<import("axios").AxiosResponse<any>>;
+    get(path: string, config?: AxiosRequestConfig): Promise<import("axios").AxiosResponse<any, any>>;
+    post(path: string, data?: any, config?: AxiosRequestConfig): Promise<import("axios").AxiosResponse<any, any>>;
+    put(path: string, data?: any, config?: AxiosRequestConfig): Promise<import("axios").AxiosResponse<any, any>>;
+    delete(path: string, config?: AxiosRequestConfig): Promise<import("axios").AxiosResponse<any, any>>;
+    head(path: string, config?: AxiosRequestConfig): Promise<import("axios").AxiosResponse<any, any>>;
+    patch(path: string, data?: any, config?: AxiosRequestConfig): Promise<import("axios").AxiosResponse<any, any>>;
     private getWwwAuth;
     private getAuthHeader;
 }
