@@ -174,6 +174,11 @@ export default class AxiosDigest {
     if (config === undefined) {
       return { headers: { Authorization: auth } };
     }
+
+    if (config.headers === undefined) {
+      // eslint-disable-next-line no-param-reassign
+      config.headers = {};
+    }
     // eslint-disable-next-line no-param-reassign
     config.headers.Authorization = auth;
     return config;
