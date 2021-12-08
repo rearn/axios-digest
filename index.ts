@@ -113,7 +113,7 @@ export default class AxiosDigest {
       }
       return v;
     }).filter((v) => ['MD5', 'SHA-256', 'SHA-512-256', 'SHA-512'].findIndex((i) => i === v.algorithm) >= 0)
-      .filter((v) => calams.filter((value) => !(value in v)).length === 0)
+      .filter((v) => calams.filter((value) => !(value in v)).length !== 0)
       .filter((v) => v.qop.split(/\s*,\s*/).filter((v2) => v2 === 'auth').length !== 0);
 
     if (paramsCalamsOk.length === 0) {
@@ -138,8 +138,8 @@ export default class AxiosDigest {
       algorithm,
     } = params;
     const uri: string = url.split(/^https?:\/\/[^/]+/).filter((v) => v !== '')[0];
-    const cnonce: string = Math.random().toString(32).substring(2); // gaba
-    const nc: string = '0001'; // gaba
+    const cnonce: string = Math.random().toString(36).substring(2, 10);
+    const nc: string = '00000001';
     const qop: string = 'auth';
 
     const hashHex = ((): (str: string) => string => {
