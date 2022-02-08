@@ -105,7 +105,7 @@ export default class AxiosDigest {
       });
       return t;
     });
-    const calams = ['realm', 'nonce', 'qop', 'opaque'];
+    const calams = ['realm', 'nonce', 'qop'];
     const paramsCalamsOk = paramsMapArray.map((v) => {
       if (!('algorithm' in v)) {
         // eslint-disable-next-line no-param-reassign
