@@ -78,9 +78,11 @@ export default class AxiosDigest {
 
   // eslint-disable-next-line class-methods-use-this
   private getWwwAuth(r: any) {
-    const { status } = r.response;
-    if (status === 401) {
-      return r.response.headers['www-authenticate'];
+    if (r.response) {
+      const { status } = r.response;
+      if (status === 401) {
+        return r.response.headers['www-authenticate'];
+      }
     }
     throw r;
   }
