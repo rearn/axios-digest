@@ -1,20 +1,23 @@
 {
-    "env": {
-        "browser": true,
-        "es2020": true,
-        "node": true
-    },
-    "extends": [
-        "airbnb-base"
-    ],
-    "parser": "@typescript-eslint/parser",
-    "parserOptions": {
-        "ecmaVersion": 11,
-        "sourceType": "module"
-    },
-    "plugins": [
-        "@typescript-eslint"
-    ],
-    "rules": {
-    }
+	"env": {
+		"browser": true,
+		"es2020": true,
+		"node": true
+	},
+	"extends": ["airbnb-base"],
+	"parser": "@typescript-eslint/parser",
+	"parserOptions": {
+		"ecmaVersion": 11,
+		"sourceType": "module"
+	},
+	"plugins": ["@typescript-eslint"],
+	"rules": {
+		"lines-between-class-members": "off",
+		"no-tabs": "off",
+		"indent": ["error", "tab"],
+		"max-len": ["error", 120],
+		"implicit-arrow-linebreak": "off",
+		"function-paren-newline": "off",
+		"object-curly-newline": "off"
+	}
 }

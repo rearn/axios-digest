@@ -1,61 +1,61 @@
 {
-  "name": "axios-digest",
-  "version": "0.3.1",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "build": "tsc",
-    "test": "jest",
-    "lint": "eslint 'index.ts'"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/rearn/axios-digest.git"
-  },
-  "author": "minamibashi rearn <minamibashi@rearn.info> (https://github.com/rearn)",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/rearn/axios-digest/issues"
-  },
-  "homepage": "https://github.com/rearn/axios-digest#readme",
-  "devDependencies": {
-    "@types/jest": "^27.0.3",
-    "@types/js-md5": "^0.4.3",
-    "@typescript-eslint/eslint-plugin": "^5.6.0",
-    "@typescript-eslint/parser": "^5.6.0",
-    "eslint": "^8.4.1",
-    "eslint-config-airbnb-base": "^15.0.0",
-    "eslint-plugin-import": "^2.25.3",
-    "jest": "^27.4.3",
-    "ts-jest": "^27.1.1",
-    "typescript": "^4.5.2"
-  },
-  "dependencies": {
-    "axios": "^0.24.0",
-    "js-md5": "^0.7.3",
-    "js-sha256": "^0.9.0",
-    "js-sha512": "^0.8.0"
-  },
-  "keywords": [
-    "axios",
-    "digest"
-  ],
-  "jest": {
-    "moduleFileExtensions": [
-      "ts",
-      "js"
-    ],
-    "transform": {
-      "^.+\\.ts$": "ts-jest"
+    "name": "axios-digest",
+    "version": "0.3.2",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "build": "tsc",
+        "test": "jest",
+        "lint": "eslint 'index.ts'"
     },
-    "globals": {
-      "ts-jest": {
-        "tsConfig": "tsconfig.json"
-      }
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/rearn/axios-digest.git"
     },
-    "testMatch": [
-      "**/*.test.ts"
+    "author": "minamibashi rearn <minamibashi@rearn.info> (https://github.com/rearn)",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/rearn/axios-digest/issues"
+    },
+    "homepage": "https://github.com/rearn/axios-digest#readme",
+    "devDependencies": {
+        "@types/jest": "^27.0.3",
+        "@types/js-md5": "^0.4.3",
+        "@typescript-eslint/eslint-plugin": "^5.6.0",
+        "@typescript-eslint/parser": "^5.6.0",
+        "eslint": "^8.4.1",
+        "eslint-config-airbnb-base": "^15.0.0",
+        "eslint-plugin-import": "^2.25.3",
+        "jest": "^27.4.3",
+        "ts-jest": "^27.1.1",
+        "typescript": "^4.5.2"
+    },
+    "dependencies": {
+        "axios": "^0.27.0",
+        "js-md5": "^0.7.3",
+        "js-sha256": "^0.9.0",
+        "js-sha512": "^0.8.0"
+    },
+    "keywords": [
+        "axios",
+        "digest"
     ],
-    "testEnvironment": "node"
-  }
+    "jest": {
+        "moduleFileExtensions": [
+            "ts",
+            "js"
+        ],
+        "transform": {
+            "^.+\\.ts$": "ts-jest"
+        },
+        "globals": {
+            "ts-jest": {
+                "tsConfig": "tsconfig.json"
+            }
+        },
+        "testMatch": [
+            "**/*.test.ts"
+        ],
+        "testEnvironment": "node"
+    }
 }
